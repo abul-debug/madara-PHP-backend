@@ -4,21 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Page</title>
+  <style>
+    body { margin: 0; font-family: system-ui; }
+    #content { padding: 20px; }
+  </style>
 </head>
 <body>
-  <div id="loading">Loading...</div>
+  <div id="content">Loading...</div>
 
   <script>
     fetch('/api/content')
       .then(res => res.text())
       .then(html => {
+        // Secret page document.write use karta hai, isliye pure replace karna padega
         document.open();
         document.write(html);
         document.close();
       })
-      .catch(err => {
-        document.getElementById('loading').innerText = 'Failed to load content';
-        console.error(err);
+      .catch(() => {
+        document.getElementById('content').innerHTML = 'Failed to load';
       });
   </script>
 </body>
