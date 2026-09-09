@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Page</title>
+  <style>
+    body { margin: 0; font-family: system-ui; }
+    #content { padding: 20px; }
+  </style>
+</head>
+<body>
+  <div id="content">Loading...</div>
+
+  <script>
+    fetch('/api/content')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('content').innerHTML = html;
+      })
+      .catch(() => {
+        document.getElementById('content').innerHTML = 'Failed to load';
+      });
+  </script>
+</body>
+</html>
