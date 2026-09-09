@@ -4,22 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Page</title>
-  <style>
-    body { margin: 0; font-family: system-ui; }
-    #content { padding: 20px; }
-  </style>
 </head>
 <body>
-  <div id="content">Loading...</div>
+  <div id="loading">Loading...</div>
 
   <script>
     fetch('/api/content')
       .then(res => res.text())
       .then(html => {
-        document.getElementById('content').innerHTML = html;
+        document.open();
+        document.write(html);
+        document.close();
       })
-      .catch(() => {
-        document.getElementById('content').innerHTML = 'Failed to load';
+      .catch(err => {
+        document.getElementById('loading').innerText = 'Failed to load content';
+        console.error(err);
       });
   </script>
 </body>
