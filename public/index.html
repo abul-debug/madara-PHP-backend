@@ -3,73 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>My Page</title>
+  <title>MADARA 5.1</title>
   <style>
-    body { margin: 0; font-family: system-ui; }
-    #content { padding: 20px; }
+    html, body { margin:0; padding:0; height:100%; overflow:hidden; }
+    iframe { border:0; width:100%; height:100%; display:block; }
   </style>
 </head>
 <body>
-  <div id="content">Loading...</div>
-  <script>
-    fetch('/api/content')
-      .then(res => res.text())
-      .then(html => {
-        // Force mobile viewport + basic responsive styles
-        let fixedHtml = html;
-
-        // 1. Ensure viewport meta exists (or replace it)
-        if (fixedHtml.includes('<meta name="viewport"')) {
-          fixedHtml = fixedHtml.replace(
-            /<meta\s+name=["']viewport["'][^>]*>/i,
-            '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'
-          );
-        } else if (fixedHtml.includes('<head>')) {
-          fixedHtml = fixedHtml.replace(
-            '<head>',
-            '<head>\n  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">'
-          );
-        }
-
-        // 2. Inject mobile-friendly CSS
-        const mobileCSS = `
-<style>
-  /* Force mobile layout */
-  html, body {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  * {
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  img, video, iframe, table {
-    max-width: 100% !important;
-    height: auto !important;
-  }
-  /* Prevent fixed desktop widths */
-  [style*="width:"] {
-    max-width: 100% !important;
-  }
-</style>`;
-
-        if (fixedHtml.includes('</head>')) {
-          fixedHtml = fixedHtml.replace('</head>', mobileCSS + '\n</head>');
-        } else {
-          fixedHtml = mobileCSS + fixedHtml;
-        }
-
-        // Now write the fixed version
-        document.open();
-        document.write(fixedHtml);
-        document.close();
-      })
-      .catch(() => {
-        document.getElementById('content').innerHTML = 'Failed to load';
-      });
-  </script>
+  <iframe src="MADARA_5.1_LightBrown_Dashboard.html" allow="fullscreen"></iframe>
 </body>
 </html>
